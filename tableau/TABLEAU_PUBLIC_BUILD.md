@@ -6,13 +6,18 @@ You have **Tableau Desktop** installed. Use it to build, then **publish to Table
 - Repo: `tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`
 - Also copied to: `~/Downloads/Mal_Enterprise_BI_Tableau_Data.xlsx`
 
-**Publish target:** https://public.tableau.com  
+**Publish target:** [Tableau Public Discover](https://public.tableau.com/app/discover) — https://public.tableau.com/app/discover  
+
+> **Important for the assessment form:** Do **not** submit the Discover home page URL.  
+> After you publish, submit **your workbook / viz URL** (it will look like  
+> `https://public.tableau.com/app/profile/<your-name>/viz/<WorkbookName>/<Dashboard>`).  
+> Reviewers must open it in incognito with no login.
 
 ---
 
 ## 0) One-time setup
 
-1. Create a free Tableau Public account at https://public.tableau.com (same email you will publish with).
+1. Create / sign in to a free Tableau Public account at https://public.tableau.com/app/discover (same account you will publish with).
 2. Open **Tableau Desktop**.
 3. **Connect → Microsoft Excel** → select `Mal_Enterprise_BI_Tableau_Data.xlsx`.
 4. Drag these sheets into the canvas (or Union/relationships as below):

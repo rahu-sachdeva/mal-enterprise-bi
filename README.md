@@ -13,7 +13,8 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 | Item | Link |
 |------|------|
 | **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
-| **Live dashboard URL (Tableau Public)** | `https://public.tableau.com/app/profile/.../viz/...` ← paste after you publish; test in an **incognito** window |
+| **Tableau Public (platform)** | https://public.tableau.com/app/discover |
+| **Live dashboard URL** | Publish the workbook to Tableau Public, then paste **your viz URL** here (Profile → your workbook). Must open in **incognito** with no login. |
 
 **Build on Tableau Public:** see [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md)  
 **Data for Tableau:** [`tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`](tableau/Mal_Enterprise_BI_Tableau_Data.xlsx) (also in your Downloads folder)
@@ -147,12 +148,15 @@ Open `http://localhost:8501`.
 
 ## Deploy live dashboard — Tableau Public (recommended for submission)
 
-1. Open **Tableau Desktop** (you already have it) or [Tableau Public](https://public.tableau.com/app/discover).  
-2. Connect to `tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`.  
+Platform: [Tableau Public Discover](https://public.tableau.com/app/discover)
+
+1. Sign in / create an account on https://public.tableau.com/app/discover  
+2. Open **Tableau Desktop** (or Tableau Public Desktop) and connect to `tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`.  
 3. Follow the step-by-step build: [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md).  
 4. **Server → Tableau Public → Save to Tableau Public…** (show sheets as tabs).  
-5. Open the published URL in an **incognito** window (no login).  
-6. Paste the URL into the table at the top of this README and into the assessment form.
+5. After publish, open **your profile** on Tableau Public → open the workbook → copy the **viz URL** (not the Discover home page).  
+6. Test that viz URL in an **incognito** window (no login).  
+7. Paste **your viz URL** into the assessment form and into the Live dashboard row at the top of this README.
 
 ### Optional: Streamlit local / Cloud
 
