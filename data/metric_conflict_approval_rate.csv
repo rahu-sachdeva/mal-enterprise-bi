@@ -1,0 +1,5 @@
+market,as_of_date,metric,definition_owner,definition_label,status,value,formula,why_it_diverges
+UAE,2026-03-31,Credit Approval Rate,Credit,Exploratory — Credit,exploratory,0.6098,approved_flag (Credit decision engine) / applications,Counts soft-approvals before KYC / affordability complete
+UAE,2026-03-31,Credit Approval Rate,BI (Certified),CERTIFIED — Enterprise,certified,0.522,final credit approve after KYC + affordability / applications,Used on Executive Dashboard; aligns with booked funnel
+KSA,2026-03-31,Credit Approval Rate,Credit,Exploratory — Credit,exploratory,0.6165,approved_flag (Credit decision engine) / applications,Counts soft-approvals before KYC / affordability complete
+KSA,2026-03-31,Credit Approval Rate,BI (Certified),CERTIFIED — Enterprise,certified,0.5485,final credit approve after KYC + affordability / applications,Used on Executive Dashboard; aligns with booked funnel

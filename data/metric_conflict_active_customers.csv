@@ -1,0 +1,9 @@
+market,as_of_date,metric,definition_owner,definition_label,status,value,formula,why_it_diverges
+UAE,2026-03-31,Active Customers,Product,Exploratory — Product,exploratory,24009,COUNT DISTINCT customers with app login in last 30 days,Includes browsers who never open a financial product
+UAE,2026-03-31,Active Customers,Finance,Exploratory — Finance,exploratory,18295,COUNT DISTINCT customers with a revenue-recognised transaction in last 90 days,Excludes dormant savers and newly approved not-yet-booked borrowers
+UAE,2026-03-31,Active Customers,Credit,Exploratory — Credit,exploratory,12828,COUNT DISTINCT customers with open loan status on CBS (active book),Ignores savings-only and payments-only customers
+UAE,2026-03-31,Active Customers,BI (Certified),CERTIFIED — Enterprise,certified,19151,COUNT DISTINCT customers with at least one open product relationship (active loan on CBS OR open savings account OR active card) AND KYC complete AND not fraud-blocked,Reconciled enterprise definition for all executive reporting
+KSA,2026-03-31,Active Customers,Product,Exploratory — Product,exploratory,24042,COUNT DISTINCT customers with app login in last 30 days,Includes browsers who never open a financial product
+KSA,2026-03-31,Active Customers,Finance,Exploratory — Finance,exploratory,18333,COUNT DISTINCT customers with a revenue-recognised transaction in last 90 days,Excludes dormant savers and newly approved not-yet-booked borrowers
+KSA,2026-03-31,Active Customers,Credit,Exploratory — Credit,exploratory,12814,COUNT DISTINCT customers with open loan status on CBS (active book),Ignores savings-only and payments-only customers
+KSA,2026-03-31,Active Customers,BI (Certified),CERTIFIED — Enterprise,certified,18986,COUNT DISTINCT customers with at least one open product relationship (active loan on CBS OR open savings account OR active card) AND KYC complete AND not fraud-blocked,Reconciled enterprise definition for all executive reporting
