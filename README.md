@@ -12,7 +12,7 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 
 | Item | Link |
 |------|------|
-| **GitLab repository** | Public under [personal-group2303741](https://gitlab.com/groups/personal-group2303741) — anyone with the URL can view (no login required for public projects) |
+| **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
 | **Live dashboard URL** | `https://YOUR-APP.streamlit.app` ← replace after Streamlit Cloud deploy; test in an **incognito** window |
 
 ---
@@ -144,10 +144,10 @@ Open `http://localhost:8501`.
 
 ## Deploy live dashboard (public, no login)
 
-1. Connect this GitLab repo to [Streamlit Community Cloud](https://share.streamlit.io) (or mirror to GitHub if Cloud requires it).  
-2. Main file: `Home.py`  
+1. Go to [Streamlit Community Cloud](https://share.streamlit.io) → New app.  
+2. Repo: `rahu-sachdeva/mal-enterprise-bi` · Branch: `main` · Main file: `Home.py`  
 3. Make the app **public**.  
-4. Paste the URL into the table at the top of this README.  
+4. Paste the URL into the table at the top of this README and commit.  
 5. Verify in an **incognito** window before submission.
 
 ---
