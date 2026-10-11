@@ -1,0 +1,25 @@
+as_of_date,market,kpi_id,kpi_name,value,format,status,domain
+2026-03-31,UAE,KPI-P01,Active Customers (Certified),19151.0,number,certified,Product
+2026-03-31,UAE,KPI-C02,Approval Rate (Certified),0.5219512195121951,percent,certified,Credit
+2026-03-31,UAE,KPI-C04,Booking Rate,0.7242990654205608,percent,certified,Credit
+2026-03-31,UAE,KPI-C06,Portfolio Outstanding (AED),23882232.66,currency,certified,Credit
+2026-03-31,UAE,KPI-F01,Recognised Revenue (AED),7074.8,currency,certified,Finance
+2026-03-31,UAE,KPI-F03,Savings AUM (AED),9039670.29,currency,certified,Finance
+2026-03-31,UAE,KPI-Pay01,Payment Success Rate,0.8944099378881988,percent,certified,Product
+2026-03-31,UAE,KPI-C08,DPD30 Rate,0.03740436720123637,percent,certified,Credit
+2026-03-31,KSA,KPI-P01,Active Customers (Certified),18986.0,number,certified,Product
+2026-03-31,KSA,KPI-C02,Approval Rate (Certified),0.5485436893203883,percent,certified,Credit
+2026-03-31,KSA,KPI-C04,Booking Rate,0.7964601769911505,percent,certified,Credit
+2026-03-31,KSA,KPI-C06,Portfolio Outstanding (AED),22415352.51,currency,certified,Credit
+2026-03-31,KSA,KPI-F01,Recognised Revenue (AED),8100.2,currency,certified,Finance
+2026-03-31,KSA,KPI-F03,Savings AUM (AED),9095520.28,currency,certified,Finance
+2026-03-31,KSA,KPI-Pay01,Payment Success Rate,0.9021739130434783,percent,certified,Product
+2026-03-31,KSA,KPI-C08,DPD30 Rate,0.03811173701680054,percent,certified,Credit
+2026-03-31,All,KPI-P01,Active Customers (Certified),38137.0,number,certified,Product
+2026-03-31,All,KPI-C02,Approval Rate (Certified),0.5352798053527981,percent,certified,Credit
+2026-03-31,All,KPI-C04,Booking Rate,0.7613636363636364,percent,certified,Credit
+2026-03-31,All,KPI-C06,Portfolio Outstanding (AED),46297585.17,currency,certified,Credit
+2026-03-31,All,KPI-F01,Recognised Revenue (AED),15175.0,currency,certified,Finance
+2026-03-31,All,KPI-F03,Savings AUM (AED),18135190.57,currency,certified,Finance
+2026-03-31,All,KPI-Pay01,Payment Success Rate,0.8985507246376812,percent,certified,Product
+2026-03-31,All,KPI-C08,DPD30 Rate,0.03774684605218687,percent,certified,Credit

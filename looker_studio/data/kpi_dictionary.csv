@@ -1,0 +1,21 @@
+kpi_id,name,domain_owner,business_definition,formula,data_source,refresh_cadence,status,where_used
+KPI-C01,Credit Applications,Credit,Count of credit applications submitted,COUNT(applications),CBS / Loan origination events,Daily,certified,Enterprise + Credit dashboards
+KPI-C02,Credit Approval Rate (Certified),Credit,Share of applications receiving final credit approval after KYC and affordability,final_approved / applications,CBS + Underwriting,Daily,certified,Executive + Credit
+KPI-C03,Credit Approval Rate (Credit-local),Credit,Share of applications approved by Credit decision engine before final KYC gates,soft_approved / applications,Credit decision engine,Daily,exploratory,Conflict view only — not for exec
+KPI-C04,Booking Rate,Credit,Share of certified-approved applications that are disbursed/booked on CBS,booked / final_approved,CBS m_loan / disbursement events,Daily,certified,Executive + Credit
+KPI-C05,Disbursed Amount (AED),Credit,Sum of principal disbursed on booking date,SUM(disbursed_principal),CBS,Daily,certified,Executive + Credit
+KPI-C06,Portfolio Outstanding (AED),Credit,Sum of outstanding principal on active loans (CBS system of record),SUM(principal_outstanding),CBS,Daily,certified,Executive + Credit
+KPI-C07,FPD Rate,Credit,First-payment-default amount as % of first instalment due,fpd_amount / first_instalment_due,CBS repayment schedule + collections,Daily,certified,Credit risk indicator
+KPI-C08,DPD30 Rate,Credit,Outstanding in DPD≥30 as % of portfolio outstanding (amount-weighted),dpd30_outstanding / portfolio_outstanding,CBS delinquency snapshot,Daily,certified,Executive + Credit
+KPI-F01,Recognised Revenue (AED),Finance,Revenue recognised under Finance policy (fees + profit accrued in period),SUM(recognised_revenue),GL / Finance warehouse,Daily,certified,Executive — Finance SoT
+KPI-F02,Product-Reported Revenue (AED),Finance,Product's broader revenue view including deferred/projected items,SUM(product_revenue_estimate),Product analytics,Daily,exploratory,Conflict appendix — not exec
+KPI-F03,Savings AUM (AED),Finance,Total savings balances on CBS/savings ledger,SUM(savings_balance),CBS / Savings ledger,Daily,certified,Executive
+KPI-F04,New Savings Accounts,Finance,Count of savings accounts opened,COUNT(new_savings_accounts),Savings product events,Daily,certified,Executive
+KPI-P01,Active Customers (Certified),Product,"Customers with ≥1 open product relationship (loan OR savings OR card), KYC complete, not fraud-blocked",COUNT DISTINCT certified_active_customers,Customer 360 (CBS + Savings + Cards),Daily,certified,Executive — enterprise SoT
+KPI-P02,Active Customers (Product 30d login),Product,Customers with app login in last 30 days,COUNT DISTINCT login_30d,Product analytics / app events,Daily,exploratory,Conflict view
+KPI-P03,Active Customers (Finance 90d txn),Product,Customers with revenue-recognised txn in last 90 days,COUNT DISTINCT revenue_txn_90d,GL / Payments,Daily,exploratory,Conflict view
+KPI-P04,Active Customers (Credit open loan),Product,Customers with open loan on CBS,COUNT DISTINCT open_loan_customers,CBS,Daily,exploratory,Conflict view
+KPI-Pay01,Payment Success Rate,Payments,Successful payment captures / payment attempts (excl. test),successful_attempts / attempts,Payments platform,Daily,certified,Executive
+KPI-Pay02,Payment Attempts,Payments,Count of customer payment attempts,COUNT(attempts),Payments platform,Daily,certified,Ops / Product
+KPI-X01,CBS ↔ Warehouse Recon Break Rate,BI / Finance,Share of critical loan/balance keys failing OMS/CBS vs warehouse checks,break_keys / checked_keys,Recon framework,Daily,certified,Integrity (Phase-1 control)
+KPI-X02,Avg Ticket Size (AED),Credit,Average disbursed amount per booked loan,disbursed_amount / booked,CBS,Daily,certified,Credit domain

@@ -13,11 +13,16 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 | Item | Link |
 |------|------|
 | **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
-| **Tableau Public (platform)** | https://public.tableau.com/app/discover |
-| **Live dashboard URL** | Publish the workbook to Tableau Public, then paste **your viz URL** here (Profile → your workbook). Must open in **incognito** with no login. |
+| **Looker Studio (recommended)** | https://datastudio.google.com/navigation/reporting |
+| **Live dashboard URL** | Paste **your Looker Studio report URL** after Share → Anyone with the link. Must open in **incognito** with no login. |
 
-**Build on Tableau Public:** see [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md)  
-**Data for Tableau:** [`tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`](tableau/Mal_Enterprise_BI_Tableau_Data.xlsx) (also in your Downloads folder)
+**Build in Looker Studio (fastest public URL):**  
+- Quick start: [`looker_studio/QUICK_START.md`](looker_studio/QUICK_START.md)  
+- Full guide: [`looker_studio/LOOKER_STUDIO_BUILD.md`](looker_studio/LOOKER_STUDIO_BUILD.md)  
+- Data (Excel): [`looker_studio/Mal_Enterprise_BI_LookerStudio_Data.xlsx`](looker_studio/Mal_Enterprise_BI_LookerStudio_Data.xlsx) — also in Downloads  
+- Data (CSVs): [`looker_studio/data/`](looker_studio/data/)
+
+**Optional — Tableau Public:** [`tableau/`](tableau/) pack + [Discover](https://public.tableau.com/app/discover)
 
 ---
 
@@ -146,25 +151,23 @@ Open `http://localhost:8501`.
 
 ---
 
-## Deploy live dashboard — Tableau Public (recommended for submission)
+## Deploy live dashboard — Looker Studio (recommended)
 
-Platform: [Tableau Public Discover](https://public.tableau.com/app/discover)
+Platform: [Looker Studio / Data Studio](https://datastudio.google.com/navigation/reporting)
 
-1. Sign in / create an account on https://public.tableau.com/app/discover  
-2. Open **Tableau Desktop** (or Tableau Public Desktop) and connect to `tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`.  
-3. Follow the step-by-step build: [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md).  
-4. **Server → Tableau Public → Save to Tableau Public…** (show sheets as tabs).  
-5. After publish, open **your profile** on Tableau Public → open the workbook → copy the **viz URL** (not the Discover home page).  
-6. Test that viz URL in an **incognito** window (no login).  
-7. Paste **your viz URL** into the assessment form and into the Live dashboard row at the top of this README.
+1. Import `looker_studio/Mal_Enterprise_BI_LookerStudio_Data.xlsx` into Google Sheets (see [`looker_studio/QUICK_START.md`](looker_studio/QUICK_START.md)).  
+2. Create → Report → connect that Sheet.  
+3. Build 5 pages (Executive, Credit, Conflict, Dictionary, Self-Service) using [`looker_studio/LOOKER_STUDIO_BUILD.md`](looker_studio/LOOKER_STUDIO_BUILD.md).  
+4. **Share → Anyone with the link can View**.  
+5. Test the report URL in **incognito**.  
+6. Paste into the assessment form + README.
 
-### Optional: Streamlit local / Cloud
+Do **not** submit only the Looker Studio home page URL.
 
-```bash
-streamlit run Home.py
-```
+### Optional backups
 
-Streamlit remains in the repo as a secondary prototype; Tableau Public is the primary public URL for reviewers.
+- **Tableau Public:** [`tableau/`](tableau/)  
+- **Streamlit:** `streamlit run Home.py` or Streamlit Cloud (`Home.py`)
 
 ---
 

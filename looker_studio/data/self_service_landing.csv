@@ -1,0 +1,5 @@
+section,detail
+How to request access,"Post in #bi-access (or email bi-platform@mal.bank) with dataset name, use case, manager, and PII need (Y/N)."
+Access SLA,L1/L2 access within 2 business days. P1 certified break: under 4 business hours.
+Certified rule,"Certified datasets only for Executive, OKRs, and board packs. Exploratory metrics are for local analysis and the Conflict view."
+KPI change control,Certified metrics change only via KPI Change Request (domain owner + BI + Finance for money metrics). Head of Data breaks ties.

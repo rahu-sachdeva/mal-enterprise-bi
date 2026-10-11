@@ -1,0 +1,6 @@
+dataset,domain,description,grain,access,sla,status
+certified.daily_enterprise_kpis,Enterprise,"Daily certified KPIs across Credit, Finance, Product, Payments, Savings",date × market,Domain analysts — request via #bi-access,Daily by 08:00 GST; P1 break response < 4 business hours,certified
+certified.credit_funnel_daily,Credit,Application → approval → booking funnel with FPD and DPD30,date × market,Credit + Risk — request via #bi-access,Daily by 08:00 GST,certified
+certified.dim_kpi_dictionary,BI Governance,Enterprise KPI dictionary with certified vs exploratory status,kpi_id,All staff (read); edits via KPI Change Request only,Updated within 2 business days of approved change,certified
+exploratory.metric_conflict_snapshots,BI Governance,Side-by-side conflicting definitions for education and governance,as_of × market × definition,All analysts (read),Refreshed with daily enterprise pack,exploratory
+certified.customer_360_active,Product / Credit / Finance,Customer-level flags for certified active relationship (loan/savings/card),customer_id × as_of_date,Request + manager approval (PII),Access granted within 2 business days; daily refresh,certified
