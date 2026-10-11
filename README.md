@@ -13,7 +13,10 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 | Item | Link |
 |------|------|
 | **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
-| **Live dashboard URL** | `https://YOUR-APP.streamlit.app` ← replace after Streamlit Cloud deploy; test in an **incognito** window |
+| **Live dashboard URL (Tableau Public)** | `https://public.tableau.com/app/profile/.../viz/...` ← paste after you publish; test in an **incognito** window |
+
+**Build on Tableau Public:** see [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md)  
+**Data for Tableau:** [`tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`](tableau/Mal_Enterprise_BI_Tableau_Data.xlsx) (also in your Downloads folder)
 
 ---
 
@@ -142,13 +145,22 @@ Open `http://localhost:8501`.
 
 ---
 
-## Deploy live dashboard (public, no login)
+## Deploy live dashboard — Tableau Public (recommended for submission)
 
-1. Go to [Streamlit Community Cloud](https://share.streamlit.io) → New app.  
-2. Repo: `rahu-sachdeva/mal-enterprise-bi` · Branch: `main` · Main file: `Home.py`  
-3. Make the app **public**.  
-4. Paste the URL into the table at the top of this README and commit.  
-5. Verify in an **incognito** window before submission.
+1. Open **Tableau Desktop** (you already have it) or [Tableau Public](https://public.tableau.com/app/discover).  
+2. Connect to `tableau/Mal_Enterprise_BI_Tableau_Data.xlsx`.  
+3. Follow the step-by-step build: [`tableau/TABLEAU_PUBLIC_BUILD.md`](tableau/TABLEAU_PUBLIC_BUILD.md).  
+4. **Server → Tableau Public → Save to Tableau Public…** (show sheets as tabs).  
+5. Open the published URL in an **incognito** window (no login).  
+6. Paste the URL into the table at the top of this README and into the assessment form.
+
+### Optional: Streamlit local / Cloud
+
+```bash
+streamlit run Home.py
+```
+
+Streamlit remains in the repo as a secondary prototype; Tableau Public is the primary public URL for reviewers.
 
 ---
 
