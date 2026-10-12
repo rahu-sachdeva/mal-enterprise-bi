@@ -207,20 +207,18 @@ function safeDiv_(a, b) {
   return b ? a / b : 0;
 }
 
-/** Optional: custom menu inside the spreadsheet */
+/** Optional menu inside the spreadsheet */
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Mal BI')
-    .addItem('Open HTML dashboard (dev)', 'openDashboardDialog_')
+    .addItem('How to open dashboard', 'openDashboardDialog_')
     .addToUi();
 }
 
 function openDashboardDialog_() {
-  var html = HtmlService.createHtmlOutput(
-    '<p>Deploy this project as a <b>Web app</b> (Deploy → New deployment → Web app → Anyone), ' +
-      'then open the deployment URL for the live HTML report with charts.</p>'
-  )
-    .setWidth(420)
-    .setHeight(140);
+  var msg =
+    '<p>Deploy as Web app: Deploy - New deployment - Web app - Anyone.</p>' +
+    '<p>Then open the deployment URL for the live HTML report.</p>';
+  var html = HtmlService.createHtmlOutput(msg).setWidth(420).setHeight(140);
   SpreadsheetApp.getUi().showModalDialog(html, 'Mal Enterprise BI');
 }
