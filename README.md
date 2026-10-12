@@ -14,16 +14,23 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 |------|------|
 | **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
 | **Live dashboard (Google Sheets)** | https://docs.google.com/spreadsheets/d/1ag8hwKSlCm_GwLQvL-EeB2gJeLRqImkE4VmvklMJERc/edit?usp=sharing |
+| **Full report file (with charts)** | [`looker_studio/Mal_Enterprise_BI_Full_Report.xlsx`](looker_studio/Mal_Enterprise_BI_Full_Report.xlsx) — import into Google Sheets |
 
-**Google Sheets report** — full Part 1 prototype in one workbook (Executive KPIs, Credit & Lending, Metric Conflict Resolution, KPI Dictionary, Self-Service Landing, plus supporting data tabs). Synthetic data only.
+**Google Sheets report** includes:
 
-**Sharing (required for reviewers):** In the Sheet → **Share** → **Anyone with the link** → **Viewer**. Test in an **incognito** window while logged out of Google.
+| Tab | Content |
+|-----|---------|
+| `00_Self_Service_Landing` | Access process, SLAs, dataset catalogue |
+| `01_Executive_Dashboard` | 8 certified KPI cards + 4 trend charts |
+| `02_Credit_Lending` | Funnel chart, portfolio, FPD/DPD30 risk charts |
+| `03_Metric_Conflict` | Active Customers & Approval Rate (3 defs + certified) + bar charts |
+| `04_KPI_Dictionary` | 20 metrics (owner, definition, formula, source, cadence, status) |
+| `Data_*` | Supporting synthetic marts |
 
-**Supporting materials in this repo:**
-- Data CSVs / Excel: [`looker_studio/data/`](looker_studio/data/), [`looker_studio/Mal_Enterprise_BI_LookerStudio_Data.xlsx`](looker_studio/Mal_Enterprise_BI_LookerStudio_Data.xlsx)
-- Optional Looker Studio build: [`looker_studio/`](looker_studio/)
-- Optional Tableau Public pack: [`tableau/`](tableau/)
-- Optional Streamlit app: `Home.py` + `pages/`
+**Import into your Sheet:** see [`looker_studio/IMPORT_TO_GOOGLE_SHEETS.md`](looker_studio/IMPORT_TO_GOOGLE_SHEETS.md)  
+**Sharing:** Sheet → **Anyone with the link → Viewer** → test in **incognito**.
+
+**Also in repo:** Streamlit app (`Home.py`), Tableau pack (`tableau/`), Looker Studio guides (`looker_studio/`)
 
 ---
 
@@ -158,25 +165,19 @@ Open `http://localhost:8501`.
 
 https://docs.google.com/spreadsheets/d/1ag8hwKSlCm_GwLQvL-EeB2gJeLRqImkE4VmvklMJERc/edit?usp=sharing
 
-Suggested tab structure in the workbook:
+**Full report workbook (charts + all tabs):**  
+[`looker_studio/Mal_Enterprise_BI_Full_Report.xlsx`](looker_studio/Mal_Enterprise_BI_Full_Report.xlsx)
 
-| Tab | Content |
-|-----|---------|
-| `00_Self_Service_Landing` | Datasets available, access request path, SLAs |
-| `01_Executive_Dashboard` | 8+ certified enterprise KPIs (Credit / Finance / Product) |
-| `02_Credit_Lending` | Approval funnel, portfolio quality, FPD / DPD30 |
-| `03_Metric_Conflict` | Active Customers (and Approval Rate) defined 3 ways + certified |
-| `04_KPI_Dictionary` | 15+ metrics with owner, definition, formula, source, cadence, status |
-| Supporting data tabs | Raw/synthetic marts used by the views above |
+1. Upload/open that file in Google Sheets (see [`looker_studio/IMPORT_TO_GOOGLE_SHEETS.md`](looker_studio/IMPORT_TO_GOOGLE_SHEETS.md)).  
+2. Prefer **Drive upload → Open with Google Sheets** so charts convert cleanly.  
+3. Set **Anyone with the link → Viewer**.  
+4. Paste the Sheet URL into the assessment form.
 
-**Assessment form:** paste the Google Sheets URL above as the Deployed BI Dashboard link.  
-**GitHub form field:** https://github.com/rahu-sachdeva/mal-enterprise-bi
+**GitHub:** https://github.com/rahu-sachdeva/mal-enterprise-bi
 
-### Optional alternatives in this repo
+### Optional alternatives
 
-- Looker Studio: [`looker_studio/`](looker_studio/)  
-- Tableau Public: [`tableau/`](tableau/)  
-- Streamlit: `streamlit run Home.py`
+- Looker Studio / Tableau / Streamlit packs remain in this repo as backups.
 
 ---
 
