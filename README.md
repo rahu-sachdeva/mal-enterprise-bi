@@ -12,25 +12,27 @@ This repository is the **working prototype** for the Enterprise BI Foundation as
 
 | Item | Link |
 |------|------|
-| **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** (anyone can view, no login required) |
-| **Live dashboard (Google Sheets)** | https://docs.google.com/spreadsheets/d/1ag8hwKSlCm_GwLQvL-EeB2gJeLRqImkE4VmvklMJERc/edit?usp=sharing |
-| **Full report file (with charts)** | [`looker_studio/Mal_Enterprise_BI_Full_Report.xlsx`](looker_studio/Mal_Enterprise_BI_Full_Report.xlsx) — import into Google Sheets |
+| **GitHub repository** | https://github.com/rahu-sachdeva/mal-enterprise-bi — **Public** |
+| **Google Sheet (data source)** | https://docs.google.com/spreadsheets/d/1GH7L9fBI-CXky-bi59BN7HglxCalYA7CgiFjTEyKcc8/edit?usp=sharing |
+| **HTML dashboard (Apps Script)** | Deploy from Sheet → paste **Web app URL** (`script.google.com/.../exec`) here after deploy |
 
-**Google Sheets report** includes:
+### Question 1 — live HTML report with charts
 
-| Tab | Content |
-|-----|---------|
-| `00_Self_Service_Landing` | Access process, SLAs, dataset catalogue |
-| `01_Executive_Dashboard` | 8 certified KPI cards + 4 trend charts |
-| `02_Credit_Lending` | Funnel chart, portfolio, FPD/DPD30 risk charts |
-| `03_Metric_Conflict` | Active Customers & Approval Rate (3 defs + certified) + bar charts |
-| `04_KPI_Dictionary` | 20 metrics (owner, definition, formula, source, cadence, status) |
-| `Data_*` | Supporting synthetic marts |
+Use the Google Sheet above as the data source. Deploy the Apps Script HTML app (Chart.js) for a public interactive report covering:
 
-**Import into your Sheet:** see [`looker_studio/IMPORT_TO_GOOGLE_SHEETS.md`](looker_studio/IMPORT_TO_GOOGLE_SHEETS.md)  
-**Sharing:** Sheet → **Anyone with the link → Viewer** → test in **incognito**.
+| Page | Content |
+|------|---------|
+| Self-Service | Access process, SLAs, dataset catalogue |
+| Executive | 8 certified KPI cards + trend charts |
+| Credit & Lending | Funnel, portfolio, FPD / DPD30 charts |
+| Metric Conflict | Active Customers & Approval Rate (3 defs + certified) |
+| KPI Dictionary | 20 metrics with owner, formula, source, cadence, status |
 
-**Also in repo:** Streamlit app (`Home.py`), Tableau pack (`tableau/`), Looker Studio guides (`looker_studio/`)
+**Setup (5–10 min):** [`apps_script/SETUP.md`](apps_script/SETUP.md)  
+**Code:** [`apps_script/Code.gs`](apps_script/Code.gs) + [`apps_script/Index.html`](apps_script/Index.html)  
+Also see tab `SETUP_HTML_DASHBOARD` inside the Sheet.
+
+**Assessment form:** submit the **Web app URL** (Anyone access) + this GitHub repo. Test the web app in **incognito**.
 
 ---
 
@@ -159,25 +161,26 @@ Open `http://localhost:8501`.
 
 ---
 
-## Deployed live dashboard — Google Sheets
+## Deployed live dashboard — Google Sheet + Apps Script HTML
 
-**Primary deliverable for Part 1:**
+**Data Sheet:**  
+https://docs.google.com/spreadsheets/d/1GH7L9fBI-CXky-bi59BN7HglxCalYA7CgiFjTEyKcc8/edit?usp=sharing
 
-https://docs.google.com/spreadsheets/d/1ag8hwKSlCm_GwLQvL-EeB2gJeLRqImkE4VmvklMJERc/edit?usp=sharing
+**HTML + charts:** follow [`apps_script/SETUP.md`](apps_script/SETUP.md)
 
-**Full report workbook (charts + all tabs):**  
-[`looker_studio/Mal_Enterprise_BI_Full_Report.xlsx`](looker_studio/Mal_Enterprise_BI_Full_Report.xlsx)
+1. Extensions → Apps Script  
+2. Paste `Code.gs` and create HTML file `Index` from `apps_script/`  
+3. Deploy → Web app → **Anyone**  
+4. Submit the `script.google.com/.../exec` URL (incognito-tested)
 
-1. Upload/open that file in Google Sheets (see [`looker_studio/IMPORT_TO_GOOGLE_SHEETS.md`](looker_studio/IMPORT_TO_GOOGLE_SHEETS.md)).  
-2. Prefer **Drive upload → Open with Google Sheets** so charts convert cleanly.  
-3. Set **Anyone with the link → Viewer**.  
-4. Paste the Sheet URL into the assessment form.
+Charts update when Sheet data changes — click **Refresh from Sheet** on the HTML page.
 
 **GitHub:** https://github.com/rahu-sachdeva/mal-enterprise-bi
 
-### Optional alternatives
+### Optional backups
 
-- Looker Studio / Tableau / Streamlit packs remain in this repo as backups.
+- Excel report: [`looker_studio/Mal_Enterprise_BI_Full_Report.xlsx`](looker_studio/Mal_Enterprise_BI_Full_Report.xlsx)  
+- Streamlit / Tableau / Looker Studio guides remain in this repo.
 
 ---
 

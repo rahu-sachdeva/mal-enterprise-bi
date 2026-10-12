@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top" />
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --navy: #1f4e79;
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --muted: #5b6b7c;
+        --line: #d7e0ea;
+        --green: #2e7d32;
+        --orange: #ef6c00;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: #1a2330;
+      }
+      header {
+        background: linear-gradient(120deg, #12375a, #1f4e79 55%, #2f6fa8);
+        color: #fff;
+        padding: 18px 22px 14px;
+      }
+      header h1 { margin: 0 0 6px; font-size: 1.35rem; font-weight: 700; }
+      header p { margin: 0; opacity: 0.9; font-size: 0.9rem; }
+      .toolbar {
+        display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+        margin-top: 12px;
+      }
+      select, button {
+        border: 0; border-radius: 8px; padding: 8px 12px; font-size: 0.9rem;
+      }
+      button {
+        background: #fff; color: var(--navy); font-weight: 600; cursor: pointer;
+      }
+      nav {
+        display: flex; flex-wrap: wrap; gap: 6px;
+        padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--line);
+        position: sticky; top: 0; z-index: 5;
+      }
+      nav button {
+        background: #eef3f8; color: var(--navy);
+      }
+      nav button.active { background: var(--navy); color: #fff; }
+      main { padding: 16px; max-width: 1200px; margin: 0 auto; }
+      .page { display: none; }
+      .page.active { display: block; }
+      .grid { display: grid; gap: 12px; }
+      .cards { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+      .charts { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+      .card, .panel {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: 12px; padding: 12px 14px;
+        box-shadow: 0 1px 2px rgba(16, 38, 64, 0.04);
+      }
+      .card .label { font-size: 0.72rem; color: var(--muted); min-height: 2.2em; }
+      .card .value { font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-top: 4px; }
+      .card .id { font-size: 0.7rem; color: #7a8a9a; margin-top: 4px; }
+      h2 { margin: 0 0 10px; font-size: 1.1rem; color: var(--navy); }
+      h3 { margin: 16px 0 8px; font-size: 0.95rem; color: var(--navy); }
+      .note {
+        background: #eef6ff; border-left: 4px solid var(--navy);
+        padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; margin: 10px 0 14px;
+      }
+      .ok {
+        background: #e8f5e9; border-left: 4px solid var(--green);
+        padding: 10px 12px; border-radius: 8px; font-size: 0.88rem; margin: 10px 0 14px;
+      }
+      table {
+        width: 100%; border-collapse: collapse; font-size: 0.8rem; background: #fff;
+      }
+      th, td {
+        border: 1px solid var(--line); padding: 7px 8px; text-align: left; vertical-align: top;
+      }
+      th { background: #eaf0f6; color: #243447; }
+      tr.certified { background: #e8f5e9; }
+      tr.exploratory { background: #fff3e0; }
+      .chart-box { position: relative; height: 280px; }
+      .loading { padding: 40px; text-align: center; color: var(--muted); }
+      footer {
+        padding: 16px; text-align: center; color: var(--muted); font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mal Enterprise BI Foundation</h1>
+      <p>
+        Part 1 prototype · Credit · Payments · Savings · Synthetic data only ·
+        Certified metrics for leadership · Conflict resolution for Active Customers
+      </p>
+      <div class="toolbar">
+        <label>
+          Market
+          <select id="market">
+            <option value="All" selected>All</option>
+            <option value="UAE">UAE</option>
+            <option value="KSA">KSA</option>
+          </select>
+        </label>
+        <button id="reload">Refresh from Sheet</button>
+        <span id="asof" style="opacity:0.9;font-size:0.85rem;"></span>
+      </div>
+    </header>
+
+    <nav>
+      <button class="navbtn active" data-page="selfserve">Self-Service</button>
+      <button class="navbtn" data-page="executive">Executive</button>
+      <button class="navbtn" data-page="credit">Credit & Lending</button>
+      <button class="navbtn" data-page="conflict">Metric Conflict</button>
+      <button class="navbtn" data-page="dictionary">KPI Dictionary</button>
+    </nav>
+
+    <main>
+      <div id="loading" class="loading">Loading dashboard data from Google Sheet…</div>
+
+      <section id="page-selfserve" class="page">
+        <h2>Self-Service Landing</h2>
+        <div class="note">
+          Certified datasets only for Executive / OKR / board packs.
+          Exploratory metrics are for local analysis and the Conflict page.
+          Request access via <b>#bi-access</b>. P1 SLA under 4 business hours.
+        </div>
+        <div class="panel">
+          <h3>How access works</h3>
+          <div id="landingTable"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Datasets available</h3>
+          <div id="catalogTable"></div>
+        </div>
+      </section>
+
+      <section id="page-executive" class="page">
+        <h2>Executive Dashboard — Certified KPIs</h2>
+        <div class="note">
+          All tiles use certified dictionary IDs only. No Product/Finance/Credit local Active Customer definitions here.
+        </div>
+        <div id="execCards" class="grid cards"></div>
+        <div class="grid charts" style="margin-top:12px;">
+          <div class="panel"><h3>Active Customers (KPI-P01)</h3><div class="chart-box"><canvas id="chartActive"></canvas></div></div>
+          <div class="panel"><h3>Approval Rate (KPI-C02)</h3><div class="chart-box"><canvas id="chartApproval"></canvas></div></div>
+          <div class="panel"><h3>Portfolio Outstanding (KPI-C06)</h3><div class="chart-box"><canvas id="chartOutstanding"></canvas></div></div>
+          <div class="panel"><h3>Recognised Revenue (KPI-F01)</h3><div class="chart-box"><canvas id="chartRevenue"></canvas></div></div>
+        </div>
+      </section>
+
+      <section id="page-credit" class="page">
+        <h2>Credit & Lending</h2>
+        <div class="note">Uses certified approval rate (final after KYC), not Credit soft-approval.</div>
+        <div class="grid charts">
+          <div class="panel"><h3>Approval funnel (latest day)</h3><div class="chart-box"><canvas id="chartFunnel"></canvas></div></div>
+          <div class="panel"><h3>Funnel rates</h3><div class="chart-box"><canvas id="chartCreditRates"></canvas></div></div>
+          <div class="panel"><h3>Risk — FPD & DPD30</h3><div class="chart-box"><canvas id="chartRisk"></canvas></div></div>
+          <div class="panel"><h3>Portfolio outstanding</h3><div class="chart-box"><canvas id="chartCreditOut"></canvas></div></div>
+        </div>
+      </section>
+
+      <section id="page-conflict" class="page">
+        <h2>Metric Conflict Resolution</h2>
+        <div class="ok">
+          <b>CERTIFIED Active Customers (KPI-P01):</b>
+          Customers with ≥1 open product relationship (active loan OR open savings OR active card),
+          KYC complete, and not fraud-blocked. Green = enterprise number. Orange = exploratory only.
+        </div>
+        <div class="grid charts">
+          <div class="panel"><h3>Active Customers — 3 definitions + certified</h3><div class="chart-box"><canvas id="chartConflictActive"></canvas></div></div>
+          <div class="panel"><h3>Approval Rate — Credit vs certified</h3><div class="chart-box"><canvas id="chartConflictApproval"></canvas></div></div>
+        </div>
+        <h3>Active Customers detail</h3>
+        <div id="conflictActiveTable"></div>
+        <h3>Approval Rate detail</h3>
+        <div id="conflictApprovalTable"></div>
+      </section>
+
+      <section id="page-dictionary" class="page">
+        <h2>KPI Dictionary</h2>
+        <div class="note">
+          Certified = Executive/board. Exploratory = local analysis / conflict education.
+          Changes require KPI Change Request; Head of Data breaks ties.
+        </div>
+        <div id="dictionaryTable"></div>
+      </section>
+    </main>
+
+    <footer>
+      Mal Lead BI assessment · Synthetic data · Charts refresh from the linked Google Sheet when you click Refresh
+    </footer>
+
+    <script>
+      var DATA = null;
+      var charts = {};
+
+      function fmt(value, format) {
+        var n = Number(value);
+        if (isNaN(n)) return value;
+        if (format === 'percent') return (n * 100).toFixed(1) + '%';
+        if (format === 'currency') return 'AED ' + Math.round(n).toLocaleString();
+        return Math.round(n).toLocaleString();
+      }
+
+      function destroyCharts() {
+        Object.keys(charts).forEach(function (k) {
+          charts[k].destroy();
+          delete charts[k];
+        });
+      }
+
+      function lineChart(id, labels, series, opts) {
+        opts = opts || {};
+        var ctx = document.getElementById(id);
+        charts[id] = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: series.map(function (s) {
+              return {
+                label: s.label,
+                data: s.data,
+                borderColor: s.color || '#1f4e79',
+                backgroundColor: 'rgba(31,78,121,0.08)',
+                tension: 0.25,
+                fill: true
+              };
+            })
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: series.length > 1 } },
+            scales: {
+              y: {
+                ticks: {
+                  callback: function (v) {
+                    return opts.percent ? (v * 100).toFixed(0) + '%' : v;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      function barChart(id, labels, values, colors) {
+        var ctx = document.getElementById(id);
+        charts[id] = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Value',
+              data: values,
+              backgroundColor: colors || '#1f4e79'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+
+      function tableHtml(rows, cols, rowClassFn) {
+        if (!rows || !rows.length) return '<p>No data</p>';
+        var h = '<table><thead><tr>';
+        cols.forEach(function (c) { h += '<th>' + c.label + '</th>'; });
+        h += '</tr></thead><tbody>';
+        rows.forEach(function (r) {
+          var cls = rowClassFn ? rowClassFn(r) : '';
+          h += '<tr class="' + cls + '">';
+          cols.forEach(function (c) {
+            var v = r[c.key];
+            if (c.format) v = fmt(v, c.format);
+            h += '<td>' + (v == null ? '' : v) + '</td>';
+          });
+          h += '</tr>';
+        });
+        h += '</tbody></table>';
+        return h;
+      }
+
+      function render() {
+        if (!DATA) return;
+        destroyCharts();
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('asof').textContent =
+          'As of sheet refresh · market ' + DATA.market +
+          (DATA.creditFunnel && DATA.creditFunnel.asOf ? ' · funnel day ' + DATA.creditFunnel.asOf : '');
+
+        // Executive cards
+        var cards = DATA.executiveCards || [];
+        document.getElementById('execCards').innerHTML = cards.map(function (c) {
+          return '<div class="card"><div class="label">' + c.kpi_name +
+            '</div><div class="value">' + fmt(c.value, c.format) +
+            '</div><div class="id">' + c.kpi_id + ' · ' + c.domain + '</div></div>';
+        }).join('');
+
+        var months = (DATA.monthlyTrends || []).map(function (r) { return r.month; });
+        lineChart('chartActive', months, [{
+          label: 'Active customers',
+          data: DATA.monthlyTrends.map(function (r) { return r.active_customers_certified; }),
+          color: '#1f4e79'
+        }]);
+        lineChart('chartApproval', months, [{
+          label: 'Approval rate',
+          data: DATA.monthlyTrends.map(function (r) { return r.approval_rate_certified; }),
+          color: '#2f6fa8'
+        }], { percent: true });
+        lineChart('chartOutstanding', months, [{
+          label: 'Outstanding AED',
+          data: DATA.monthlyTrends.map(function (r) { return r.portfolio_outstanding_aed; }),
+          color: '#0d9488'
+        }]);
+        lineChart('chartRevenue', months, [{
+          label: 'Recognised revenue',
+          data: DATA.monthlyTrends.map(function (r) { return r.revenue_finance_aed; }),
+          color: '#7c3aed'
+        }]);
+
+        // Credit
+        var f = DATA.creditFunnel || {};
+        barChart('chartFunnel',
+          ['Applications', 'Approved (Certified)', 'Booked'],
+          [f.apps || 0, f.approved || 0, f.booked || 0],
+          ['#93c5fd', '#3b82f6', '#1f4e79']
+        );
+        lineChart('chartCreditRates', months, [
+          { label: 'Approval', data: DATA.creditRisk.map(function (r) { return r.approval_rate_certified; }), color: '#1f4e79' },
+          { label: 'Booking', data: DATA.creditRisk.map(function (r) { return r.booking_rate; }), color: '#0d9488' }
+        ], { percent: true });
+        lineChart('chartRisk', months, [
+          { label: 'FPD', data: DATA.creditRisk.map(function (r) { return r.fpd_rate; }), color: '#ef6c00' },
+          { label: 'DPD30', data: DATA.creditRisk.map(function (r) { return r.dpd30_rate; }), color: '#c62828' }
+        ], { percent: true });
+        lineChart('chartCreditOut', months, [{
+          label: 'Outstanding',
+          data: DATA.creditRisk.map(function (r) { return r.portfolio_outstanding_aed; }),
+          color: '#1f4e79'
+        }]);
+
+        // Conflict
+        var ca = DATA.conflictActive || [];
+        barChart(
+          'chartConflictActive',
+          ca.map(function (r) { return r.definition_owner; }),
+          ca.map(function (r) { return Number(r.value); }),
+          ca.map(function (r) { return String(r.status) === 'certified' ? '#2e7d32' : '#ef6c00'; })
+        );
+        var cp = DATA.conflictApproval || [];
+        barChart(
+          'chartConflictApproval',
+          cp.map(function (r) { return r.definition_owner; }),
+          cp.map(function (r) { return Number(r.value); }),
+          cp.map(function (r) { return String(r.status) === 'certified' ? '#2e7d32' : '#ef6c00'; })
+        );
+        document.getElementById('conflictActiveTable').innerHTML = tableHtml(ca, [
+          { key: 'definition_label', label: 'Definition' },
+          { key: 'definition_owner', label: 'Owner' },
+          { key: 'value', label: 'Value', format: 'number' },
+          { key: 'status', label: 'Status' },
+          { key: 'formula', label: 'Formula' },
+          { key: 'why_it_diverges', label: 'Why it diverges' }
+        ], function (r) { return r.status; });
+        document.getElementById('conflictApprovalTable').innerHTML = tableHtml(cp, [
+          { key: 'definition_label', label: 'Definition' },
+          { key: 'definition_owner', label: 'Owner' },
+          { key: 'value', label: 'Value', format: 'percent' },
+          { key: 'status', label: 'Status' },
+          { key: 'formula', label: 'Formula' },
+          { key: 'why_it_diverges', label: 'Why it diverges' }
+        ], function (r) { return r.status; });
+
+        // Dictionary / self-serve
+        document.getElementById('dictionaryTable').innerHTML = tableHtml(DATA.dictionary, [
+          { key: 'kpi_id', label: 'KPI ID' },
+          { key: 'name', label: 'Name' },
+          { key: 'domain_owner', label: 'Domain owner' },
+          { key: 'business_definition', label: 'Business definition' },
+          { key: 'formula', label: 'Formula' },
+          { key: 'data_source', label: 'Data source' },
+          { key: 'refresh_cadence', label: 'Refresh' },
+          { key: 'status', label: 'Status' }
+        ], function (r) { return r.status; });
+        document.getElementById('landingTable').innerHTML = tableHtml(DATA.landing, [
+          { key: 'section', label: 'Section' },
+          { key: 'detail', label: 'Detail' }
+        ]);
+        document.getElementById('catalogTable').innerHTML = tableHtml(DATA.catalog, [
+          { key: 'dataset', label: 'Dataset' },
+          { key: 'domain', label: 'Domain' },
+          { key: 'description', label: 'Description' },
+          { key: 'grain', label: 'Grain' },
+          { key: 'access', label: 'Access' },
+          { key: 'sla', label: 'SLA' },
+          { key: 'status', label: 'Status' }
+        ], function (r) { return r.status; });
+      }
+
+      function load() {
+        document.getElementById('loading').style.display = 'block';
+        var market = document.getElementById('market').value;
+        google.script.run
+          .withSuccessHandler(function (data) {
+            DATA = data;
+            render();
+          })
+          .withFailureHandler(function (err) {
+            document.getElementById('loading').textContent = 'Error: ' + err.message;
+          })
+          .getDashboardData(market);
+      }
+
+      document.querySelectorAll('.navbtn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.navbtn').forEach(function (b) { b.classList.remove('active'); });
+          document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
+          btn.classList.add('active');
+          document.getElementById('page-' + btn.dataset.page).classList.add('active');
+        });
+      });
+      document.getElementById('page-selfserve').classList.add('active');
+      document.getElementById('market').addEventListener('change', load);
+      document.getElementById('reload').addEventListener('click', load);
+      load();
+    </script>
+  </body>
+</html>
